@@ -16,7 +16,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.provider :digital_ocean do |provider, override|
       # Make sure the ssh key is added to DO and named Vagrant
-      override.ssh.private_key_path = '~/.ssh/id_rsa'
+      override.ssh.private_key_path = '~/.ssh/filament_rsa'
       override.vm.box = 'digital_ocean'
       override.vm.box_url = "https://github.com/devopsgroup-io/vagrant-digitalocean/raw/master/box/digital_ocean.box"
 
@@ -24,13 +24,9 @@ Vagrant.configure("2") do |config|
       provider.image = 'ubuntu-14-04-x64'
       provider.region = 'TOR1'
       provider.size = '512mb'
-      config.vm.synced_folder ".", "/vagrant/code", create: true, type: "rsync", rsync__auto: true
+      config.vm.synced_folder "./code", "/vagrant/code", create: true, type: "rsync", rsync__auto: true
       #config.vm.network "private_network", ip: "192.168.50.101"
-      config.vm.provision "shell",
-      inline: <<-SHELL
-        apt-get update
-        apt-get install -y apache2
-      SHELL
+      config.vm.provision "shell", path: "bootstrap.sh"
     end
 
   # Disable automatic box update checking. If you disable this, then
