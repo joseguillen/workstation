@@ -12,8 +12,8 @@ Vagrant.configure("2") do |config|
   if (ENV["CUSTOM_HOST"]=="")
     CUSTOM_HOST="default"
   end
-  config.vm.hostname = ENV["CUSTOM_HOST"]
   config.vm.provider :digital_ocean do |provider, override|
+      config.vm.hostname = CUSTOM_HOST
       # Make sure the ssh key is added to DO and named Vagrant
       override.ssh.private_key_path = '~/.ssh/filament_rsa'
       override.vm.box = 'digital_ocean'
