@@ -51,7 +51,7 @@ echo -e "\n--- Setting up default Virtual Host ---\n"
         DocumentRoot /var/www
         ErrorLog ${APACHE_LOG_DIR}/error.log
         CustomLog ${APACHE_LOG_DIR}/access.log combined
-    </VirtualHost>" >> /etc/apache2/sites-available/workstation.conf
+</VirtualHost>" >> /etc/apache2/sites-available/workstation.conf
 a2ensite workstation.conf
 
 echo -e "\n--- Restarting Apache ---\n"
